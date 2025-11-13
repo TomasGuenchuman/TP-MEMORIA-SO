@@ -237,7 +237,6 @@ async function main() {
   agregarLog("                  Datos cargados");
   agregarLog("=======================================================");
 
-  // Puedes pedir por consola el tamaño de memoria si querés, por ahora fijo:
   let memoria: Memoria = new Memoria(tamanio, estrategia);
 
   // =============================

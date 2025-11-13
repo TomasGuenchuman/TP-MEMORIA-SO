@@ -55,15 +55,6 @@ export default class Memoria {
         agregarLog("================================");
 
         let tarea: Tarea | undefined = nuevaTarea;
-/*
-        if ( ((tarea === null) || (tarea === undefined)) && (this.tareasPendientes.length > 0) ){
-            tarea = this.tareasPendientes.shift();
-            agregarLog("Hay tareas pendientes...");
-            agregarLog("nueva tarea: ");
-            agregarLog(tarea!.toString());
-        }
-
-*/
 
         let dequeue: boolean = true;
         if ( (tarea === null) || (tarea === undefined) ){
