@@ -101,6 +101,7 @@ export default class Memoria {
             }
         } else {
             // tarea es null
+            agregarLog("");
             agregarLog("No hay tareas pendientes ni tareas nuevas");
         }
 
