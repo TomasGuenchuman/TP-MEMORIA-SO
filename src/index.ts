@@ -294,6 +294,14 @@ async function main() {
   memoria.getResumen();
 
   console.log(log);
+
+  // crear TXT
+  const ruta: string = "eventos.txt";
+
+  fs.writeFileSync(ruta, log, "utf8");
+
+  console.log("Archivo creado correctamente:", ruta);
+
 }
 
 // Ejecutar
