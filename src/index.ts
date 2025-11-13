@@ -13,8 +13,6 @@ import WorstFit from "./algoritmos/worstFit";
 import Estrategia from "./algoritmos/estrategia"; // si tu clase base se llama así
 
 export let clock: number = -1;
-export let tiempoSeleccion: number = 0;
-export let tiempoCarga: number = 0;
 let log: string = "";
 
 // =============================
@@ -126,6 +124,74 @@ async function seleccionarEstrategia(
 }
 
 // =============================
+//   TAMAÑO MEMORIA
+// =============================
+
+async function seleccionarTamanoMemoria(rl: readline.Interface): Promise<number> {
+    while (true) {
+      const resp = await preguntar(rl, "Ingrese el tamaño de la memoria física disponible: ");
+      const tam = parseInt(resp.trim(), 10);
+  
+      if (!isNaN(tam) && tam > 0) {
+        return tam;
+      }
+  
+      console.log("Valor inválido. Debe ser un número entero mayor a 0.");
+    }
+}
+
+// =============================
+//   TIEMPO SELECCION
+// =============================
+  
+async function seleccionarTiempoSeleccion(rl: readline.Interface): Promise<number> {
+    while (true) {
+      const resp = await preguntar(rl, "Ingrese el Tiempo de seleccion de particion: ");
+      const tam = parseInt(resp.trim(), 10);
+  
+      if (!isNaN(tam) && tam > -1) {
+        return tam;
+      }
+  
+      console.log("Valor inválido. Debe ser un número entero mayor a -1");
+    }
+}
+
+// =============================
+//   TIEMPO CARGA
+// =============================
+
+async function seleccionarTiempoCarga(rl: readline.Interface): Promise<number> {
+    while (true) {
+      const resp = await preguntar(rl, "Ingrese el Tiempo de carga promedio: ");
+      const tam = parseInt(resp.trim(), 10);
+  
+      if (!isNaN(tam) && tam > -1) {
+        return tam;
+      }
+  
+      console.log("Valor inválido. Debe ser un número entero mayor a -1");
+    }
+}
+
+// =============================
+//   TIEMPO LIBERACION
+// =============================
+
+async function seleccionarTiempoLiberacion(rl: readline.Interface): Promise<number> {
+    while (true) {
+      const resp = await preguntar(rl, "Ingrese el Tiempo de liberacion de particion: ");
+      const tam = parseInt(resp.trim(), 10);
+  
+      if (!isNaN(tam) && tam > -1) {
+        return tam;
+      }
+  
+      console.log("Valor inválido. Debe ser un número entero mayor a -1");
+    }
+}
+
+// =============================
 //   MAIN
 // =============================
 async function main() {
@@ -159,6 +225,12 @@ async function main() {
 
   // 3) Elegir estrategia
   const estrategia = await seleccionarEstrategia(rl);
+
+  const tamanio = await seleccionarTamanoMemoria(rl);
+  const tiempoSeleccion = await seleccionarTiempoSeleccion(rl);
+  const tiempoCarga = await seleccionarTiempoCarga(rl);
+  const tiempoLiberacion = await seleccionarTiempoLiberacion(rl);
+
   rl.close();
 
   agregarLog("=======================================================");
@@ -166,7 +238,6 @@ async function main() {
   agregarLog("=======================================================");
 
   // Puedes pedir por consola el tamaño de memoria si querés, por ahora fijo:
-  let tamanio: number = 405;
   let memoria: Memoria = new Memoria(tamanio, estrategia);
 
   // =============================
