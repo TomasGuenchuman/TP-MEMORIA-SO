@@ -12,7 +12,12 @@ import BestFit from "./algoritmos/bestFit";
 import WorstFit from "./algoritmos/worstFit";
 import Estrategia from "./algoritmos/estrategia"; // si tu clase base se llama así
 
+// EXPORTS PRINCIPALES
 export let clock: number = -1;
+export let tiempoSeleccion: number = 0;
+export let tiempoCarga: number = 0;
+export let tiempoLiberacion: number = 0;
+
 let log: string = "";
 
 // =============================
@@ -144,52 +149,74 @@ async function seleccionarTamanoMemoria(rl: readline.Interface): Promise<number>
 //   TIEMPO SELECCION
 // =============================
   
+
 async function seleccionarTiempoSeleccion(rl: readline.Interface): Promise<number> {
-    while (true) {
-      const resp = await preguntar(rl, "Ingrese el Tiempo de seleccion de particion: ");
-      const tam = parseInt(resp.trim(), 10);
-  
-      if (!isNaN(tam) && tam > -1) {
-        return tam;
-      }
-  
-      console.log("Valor inválido. Debe ser un número entero mayor a -1");
+  while (true) {
+    const resp = await preguntar(rl, "Ingrese el Tiempo de seleccion de particion (Enter = 0): ");
+    const texto = resp.trim();
+
+    if (texto === "") {
+      return 0;
     }
+
+    const tam = parseInt(texto, 10);
+
+    if (!isNaN(tam) && tam > -1) {
+      return tam;
+    }
+
+    console.log("Valor inválido. Debe ser un número entero mayor a -1");
+  }
 }
 
 // =============================
 //   TIEMPO CARGA
 // =============================
 
+
 async function seleccionarTiempoCarga(rl: readline.Interface): Promise<number> {
-    while (true) {
-      const resp = await preguntar(rl, "Ingrese el Tiempo de carga promedio: ");
-      const tam = parseInt(resp.trim(), 10);
-  
-      if (!isNaN(tam) && tam > -1) {
-        return tam;
-      }
-  
-      console.log("Valor inválido. Debe ser un número entero mayor a -1");
+  while (true) {
+    const resp = await preguntar(rl, "Ingrese el Tiempo de carga promedio (Enter = 0): ");
+    const texto = resp.trim();
+
+    if (texto === "") {
+      return 0;
     }
+
+    const tam = parseInt(texto, 10);
+
+    if (!isNaN(tam) && tam > -1) {
+      return tam;
+    }
+
+    console.log("Valor inválido. Debe ser un número entero mayor a -1");
+  }
 }
+
 
 // =============================
 //   TIEMPO LIBERACION
 // =============================
 
 async function seleccionarTiempoLiberacion(rl: readline.Interface): Promise<number> {
-    while (true) {
-      const resp = await preguntar(rl, "Ingrese el Tiempo de liberacion de particion: ");
-      const tam = parseInt(resp.trim(), 10);
-  
-      if (!isNaN(tam) && tam > -1) {
-        return tam;
-      }
-  
-      console.log("Valor inválido. Debe ser un número entero mayor a -1");
+  while (true) {
+    const resp = await preguntar(rl, "Ingrese el Tiempo de liberación de partición (Enter = 0): ");
+    const texto = resp.trim();
+
+    if (texto === "") {
+      return 0;
     }
+
+    const tam = parseInt(texto, 10);
+
+    if (!isNaN(tam) && tam > -1) {
+      return tam;
+    }
+
+    console.log("Valor inválido. Debe ser un número entero mayor a -1");
+  }
 }
+
 
 // =============================
 //   MAIN
@@ -227,9 +254,9 @@ async function main() {
   const estrategia = await seleccionarEstrategia(rl);
 
   const tamanio = await seleccionarTamanoMemoria(rl);
-  const tiempoSeleccion = await seleccionarTiempoSeleccion(rl);
-  const tiempoCarga = await seleccionarTiempoCarga(rl);
-  const tiempoLiberacion = await seleccionarTiempoLiberacion(rl);
+  tiempoSeleccion = await seleccionarTiempoSeleccion(rl);
+  tiempoCarga = await seleccionarTiempoCarga(rl);
+  tiempoLiberacion = await seleccionarTiempoLiberacion(rl);
 
   rl.close();
 

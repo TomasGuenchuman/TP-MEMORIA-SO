@@ -1,5 +1,5 @@
 import Tarea from "./tarea";
-import {clock,agregarLog} from "./index";
+import {clock,agregarLog,tiempoSeleccion,tiempoCarga,tiempoLiberacion} from "./index";
 
 export default class Particion {
 
@@ -33,7 +33,7 @@ export default class Particion {
 
     asignarTarea(tarea: Tarea): void {
         this.tarea = tarea;
-        this.finTarea = clock /*+ tiempoSeleccion + tiempoCarga + */ + tarea.getDuracion();
+        this.finTarea = clock + tiempoSeleccion + tiempoCarga + tarea.getDuracion(); // sumar tiempo  liberacion
         this.libre = false;
     }
 
