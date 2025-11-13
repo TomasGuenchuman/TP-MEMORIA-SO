@@ -5,6 +5,18 @@ import Tarea from "./tarea";
 import Tanda from "./tanda";
 import {clock,agregarLog} from "./index";
 
+interface Retorno {
+    finTarea: number,
+    tarea: Tarea
+}
+
+interface Resumen {
+    inicio: number,
+    fin: number,
+    finTarea: number,
+    tarea: Tarea
+}
+
 export default class Memoria {
     private tamanio: number;
     private particiones: Particion[] = [];
@@ -12,8 +24,11 @@ export default class Memoria {
     private totalLibre: number;
     private estrategia: Estrategia;
     private tanda: Tanda = Tanda.getInstance();
+    // resultados:
     private fragmentacion: number = 0;
-
+    private tiempoRetorno: Retorno[] = [];
+    private tiempoMedioRetorno: number = 0;
+    private resumen: Resumen[] = [];
     constructor (tamanio: number, estrategia: Estrategia = new FirstFit()){
         this.tamanio = tamanio;
         this.totalLibre = tamanio;
@@ -202,11 +217,20 @@ export default class Memoria {
             if (!particion.getLibre() && (particion.getFinTarea() <= clock) ) {
                 agregarLog("Se libero la particion");
                 this.tanda.agregar(particion.getTarea().clone());
-                particion.finalizarTarea();
-                this.totalLibre += particion.getTamanio();
                 agregarLog(particion.toString());
+                this.tiempoRetorno.push({
+                    finTarea: particion.getFinTarea(),
+                    tarea: particion.getTarea().clone()
+                });
+                this.resumen.push({
+                    inicio: particion.getInicio(),
+                    fin: particion.getFin(),
+                    finTarea: particion.getFinTarea(),
+                    tarea: particion.getTarea().clone()
+                });
+                this.totalLibre += particion.getTamanio();
                 i += 1;
-
+                particion.finalizarTarea();
             }
         }
         agregarLog("-   Tareas finalizadas: " + i);
@@ -224,6 +248,27 @@ export default class Memoria {
             }
         }
 
+    }
+
+    calculoTiempoRetorno(): void {
+        let retornoTanda: number = 0;
+        agregarLog("-Retorno procesos: ");
+        for (const retorno of this.tiempoRetorno) {
+            agregarLog(`  Tarea: ${retorno.tarea.getNombre()} - Tiempo Retorno: ${retorno.finTarea}`);
+            retornoTanda = retorno.finTarea;
+            this.tiempoMedioRetorno += retornoTanda;
+        }
+        agregarLog("-Retorno de la tanda: " + retornoTanda);
+        agregarLog("total tareas: " + this.tanda.getTotalTarea());
+        agregarLog("-Tiempo medio de Retorno: " + this.tiempoMedioRetorno/this.tanda.getTotalTarea());
+        
+    }
+
+    getResumen(): void {
+        agregarLog("RESUMEN: ");
+        for (const resumen of this.resumen) {
+            agregarLog(`  Tarea: ${resumen.tarea.getNombre()} - particion: [ ${resumen.inicio} , ${resumen.fin} ] - Fin tarea: ${resumen.finTarea}`);
+        }
     }
 
     getTotalLibre(): number {

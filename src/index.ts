@@ -1,4 +1,4 @@
-import datos from "../tandas/memoria_par.json";
+import datos from "../tandas/memoria_8p.json";
 import Tarea from "./tarea";
 import Tanda from "./tanda";
 import Memoria from "./memoria";
@@ -23,7 +23,7 @@ tanda.agregarTanda(tareas);
 agregarLog("=======================================================");
 agregarLog("                  Datos cargados");
 agregarLog("=======================================================");
-let tamanio: number = 130;
+let tamanio: number = 405;
 let memoria: Memoria = new Memoria(tamanio, new NextFit());
 
 //console.log(tanda.toString());
@@ -48,5 +48,9 @@ while ( (tanda.hayTareas()) || (memoria.hayTareasPendiente()) ){
     memoria.calcularFragmentacion()
 }
 agregarLog(tanda.listosToString());
+agregarLog("========================================");
 agregarLog("Fragmentacion: " + memoria.getFragmentacion());
+memoria.calculoTiempoRetorno()
+agregarLog("========================================");
+memoria.getResumen();
 console.log(log);
