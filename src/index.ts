@@ -24,7 +24,7 @@ agregarLog("=======================================================");
 agregarLog("                  Datos cargados");
 agregarLog("=======================================================");
 let tamanio: number = 130;
-let memoria: Memoria = new Memoria(tamanio, new WorstFit());
+let memoria: Memoria = new Memoria(tamanio, new NextFit());
 
 //console.log(tanda.toString());
 
@@ -44,6 +44,9 @@ while ( (tanda.hayTareas()) || (memoria.hayTareasPendiente()) ){
 
     let tarea: Tarea | null = tanda.ObtenerTarea();
     memoria.agregarTarea(tarea!);
+
+    memoria.calcularFragmentacion()
 }
 agregarLog(tanda.listosToString());
+agregarLog("Fragmentacion: " + memoria.getFragmentacion());
 console.log(log);

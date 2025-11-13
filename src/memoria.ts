@@ -12,6 +12,7 @@ export default class Memoria {
     private totalLibre: number;
     private estrategia: Estrategia;
     private tanda: Tanda = Tanda.getInstance();
+    private fragmentacion: number = 0;
 
     constructor (tamanio: number, estrategia: Estrategia = new FirstFit()){
         this.tamanio = tamanio;
@@ -214,8 +215,23 @@ export default class Memoria {
         }
     }
 
+    calcularFragmentacion(): void {
+
+        const hayPendientes: boolean = (this.tareasPendientes.length > 0);
+        for (const p of this.particiones) {
+            if ( p.getLibre() && (hayPendientes || this.tanda.hayTareas()) ) {
+                this.fragmentacion += p.getTamanio();
+            }
+        }
+
+    }
+
     getTotalLibre(): number {
         return this.totalLibre;
+    }
+
+    getFragmentacion(): number {
+        return this.fragmentacion;
     }
 
     hayTareasPendiente(): boolean {
