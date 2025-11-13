@@ -4,7 +4,8 @@ import Tanda from "./tanda";
 import Memoria from "./memoria";
 import FirstFit from "./algoritmos/firstFit";
 import NextFit from "./algoritmos/nextFit";
-
+import BestFit from "./algoritmos/bestFit";
+import WorstFit from "./algoritmos/worstFit";
 
 export let clock: number = -1;
 export let tiempoSeleccion: number = 0;
@@ -23,7 +24,7 @@ agregarLog("=======================================================");
 agregarLog("                  Datos cargados");
 agregarLog("=======================================================");
 let tamanio: number = 130;
-let memoria: Memoria = new Memoria(tamanio, new NextFit());
+let memoria: Memoria = new Memoria(tamanio, new WorstFit());
 
 //console.log(tanda.toString());
 
