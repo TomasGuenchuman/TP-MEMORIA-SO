@@ -20,9 +20,9 @@ export default class Memoria {
         
         // Creo una particion LIBRE que ocupe toda la memoria
         this.particiones.push(new Particion (
-            this.tamanio+1,// tamaño de la particion
+            this.tamanio,// tamaño de la particion
             0,// inicio
-            this.tamanio, // fin
+            this.tamanio-1, // fin
             true // libre?
         ));
 
