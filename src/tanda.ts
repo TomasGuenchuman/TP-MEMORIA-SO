@@ -1,5 +1,5 @@
 import Tarea from "./tarea";
-import { agregarLog } from "./index";
+import { agregarLog, clock } from "./index";
 
 export default class Tanda {
     private static instance: Tanda;
@@ -28,6 +28,10 @@ export default class Tanda {
       return this.cola.length > 0;
     }
 
+    getTotalTarea(): number{
+      return this.totalTareas;
+    }
+
     TandaTerminada(): boolean {
 
       let termino: boolean = this.listos.length === this.totalTareas;
@@ -37,7 +41,20 @@ export default class Tanda {
     }
   
     ObtenerTarea(): Tarea | null{
-      return this.cola.shift() ?? null;
+      let aux: Tarea | undefined = this.cola.shift();
+
+      if ( (aux === null) || (aux === undefined) ) {
+        return null;
+      }
+
+      if ( ( aux!.getTiempoArribo() <= clock ) ){
+        agregarLog("Arribo la tarea: "+ aux.getNombre() + " - en el tiempo: " + aux.getTiempoArribo() );
+        return aux!;
+      }
+
+      this.cola.unshift(aux);
+
+      return null;
     }
   
     agregar(item: Tarea): void {

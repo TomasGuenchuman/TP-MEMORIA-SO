@@ -36,6 +36,10 @@ export default class Tarea {
       return this.duracion;
     }
 
+    getTiempoArribo(): number {
+      return this.tiempo_arribo;
+    }
+
     clone(): Tarea {
       return new Tarea(
         this.nombre,
