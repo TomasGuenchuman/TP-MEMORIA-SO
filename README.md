@@ -34,33 +34,45 @@ Podés verificar tu versión de Node con:
 node -v
 ```
 
----
-
 ## 📥 Instalación y ejecución del proyecto
 
 ### 1️⃣ Clonar el repositorio
-```
 git clone https://github.com/TomasGuenchuman/TP-MEMORIA-SO.git
-```
 
 ### 2️⃣ Entrar a la carpeta del proyecto
-```
 cd TP-MEMORIA-SO
-```
 
 ### 3️⃣ Instalar dependencias
-```
 npm install
-```
 
-### 4️⃣ Compilar el proyecto (TypeScript → JavaScript)
-```
+--------------------------------------------------------------------
+
+## 🚀 Ejecución del proyecto
+A continuación se detallan dos caminos posibles según el sistema operativo utilizado.
+
+--------------------------------------------------------------------
+
+## 🐧 ✔️ Si usás Linux (recomendado)
+
+### 4️⃣ Compilar el proyecto
 npm run build
-```
 
 ### 5️⃣ Ejecutar el proyecto
-```
-npm run start
-```
+npm start
 
----
+--------------------------------------------------------------------
+
+## 🪟🍎 ✔️ Si usás Windows o macOS (otros SO)
+
+En algunos sistemas operativos los scripts pueden fallar, por lo que la compilación y ejecución deben hacerse de forma manual.
+
+### 4️⃣ Compilar manualmente TypeScript
+1. Ejecutar compilador:
+npx tsc
+
+(Esto generará la carpeta "dist/" con los archivos JavaScript)
+
+1. Ejecutar el programa:
+node dist/index.js
+
+--------------------------------------------------------------------
