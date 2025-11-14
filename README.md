@@ -5,6 +5,16 @@ Trabajo Integrador – Sistemas Operativos
 Este proyecto implementa un **simulador de administración de memoria** para un sistema *monoprocesador con multiprogramación*, desarrollado como parte de la materia **Sistemas Operativos**.  
 Incluye la representación de memoria física, manejo de particiones dinámicas, algoritmos de asignación (First Fit, Best Fit, Worst Fit, Next Fit) y el procesamiento secuencial de tandas de tareas.
 
+
+## 📖 Índice
+- [Supuestos del simulador](#supuestos)
+- [Agregar Nuevas tandas](#tandas)
+- [Diagramas de Gantt](#gantt)
+- [Instalar las dependencias del proyecto](#instalar)
+- [Ejecucion del proyecto](#ejecutar)
+
+<a id='supuestos'>
+
 ### 📌 Supuestos del simulador
 A continuación se establecen ciertos criterios y decisiones de diseño para interpretar correctamente el funcionamiento del simulador:
 
@@ -15,12 +25,6 @@ A continuación se establecen ciertos criterios y decisiones de diseño para int
   Por este motivo, en cada ciclo del reloj el simulador revisará si existen particiones contiguas que puedan fusionarse.  
   Si dos o más particiones contiguas están libres, el simulador las unificará automáticamente en una sola partición mayor.  
 ---
-
-## 📖 Índice
-- [Agregar Nuevas tandas](#tandas)
-- [Diagramas de Gantt](#gantt)
-- [Instalar las dependencias del proyecto](#instalar)
-- [Ejecucion del proyecto](#ejecutar)
 
 <a id='tandas'>
 
