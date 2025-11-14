@@ -5,6 +5,21 @@ Trabajo Integrador – Sistemas Operativos
 Este proyecto implementa un **simulador de administración de memoria** para un sistema *monoprocesador con multiprogramación*, desarrollado como parte de la materia **Sistemas Operativos**.  
 Incluye la representación de memoria física, manejo de particiones dinámicas, algoritmos de asignación (First Fit, Best Fit, Worst Fit, Next Fit) y el procesamiento secuencial de tandas de tareas.
 
+### 📌 Supuestos del simulador
+A continuación se establecen ciertos criterios y decisiones de diseño para interpretar correctamente el funcionamiento del simulador:
+
+- **No se calcula fragmentación externa durante el tiempo de selección ni tiempo de carga.**  
+  Esto se debe a que la tarea aún no fue cargada a memoria RAM, por lo cual no existen particiones a evaluar para fragmentación.
+
+- **No se calcula fragmentación durante el tiempo de liberación.**  
+  En esta etapa la tarea ya terminó y se libera la partición; la fragmentación se mide únicamente en los estados estables posteriores a cada ciclo del reloj.
+
+- *(Agregar más supuestos aquí…)*  
+  -  
+  -  
+
+---
+
 ### 📌 Agregar nuevas tandas de tareas  
 Para ejecutar el simulador con diferentes cargas de trabajo, simplemente incorporá un archivo **JSON** dentro de la carpeta `tandas/`.  
 Cada archivo debe respetar la estructura de definición de tareas (nombre, tiempo de arribo, duración y memoria requerida).  
