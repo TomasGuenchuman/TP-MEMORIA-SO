@@ -11,13 +11,18 @@ A continuación se establecen ciertos criterios y decisiones de diseño para int
 - **No se calcula fragmentación externa durante el tiempo de selección ni tiempo de carga.**  
   Esto se debe a que la tarea aún no fue cargada a memoria RAM, por lo cual no existen particiones a evaluar para fragmentación.
 
-- **No se calcula fragmentación durante el tiempo de liberación.**  
-  En esta etapa la tarea ya terminó y se libera la partición
-
 - **El tiempo de selección incluye el recálculo de la tabla de particiones.**  
   Por este motivo, en cada ciclo del reloj el simulador revisará si existen particiones contiguas que puedan fusionarse.  
   Si dos o más particiones contiguas están libres, el simulador las unificará automáticamente en una sola partición mayor.  
 ---
+
+## 📖 Índice
+- [Agregar Nuevas tandas](#tandas)
+- [Diagramas de Gantt](#gantt)
+- [Instalar las dependencias del proyecto](#instalar)
+- [Ejecucion del proyecto](#ejecutar)
+
+<a id='tandas'>
 
 ### 📌 Agregar nuevas tandas de tareas  
 Para ejecutar el simulador con diferentes cargas de trabajo, simplemente incorporá un archivo **JSON** dentro de la carpeta `tandas/`.  
@@ -35,6 +40,7 @@ Formato que debe respetar cada elemento del JSON:
 ```
 ---
 
+<a id='gantt'>
 
 ### 📊 Pruebas incluidas (gantt.xls)  
 En el archivo **gantt.xls**, ubicado en la carpeta raíz del proyecto, se incluyen diversas pruebas del simulador.  
@@ -48,7 +54,7 @@ Estas pruebas fueron ejecutadas con **tiempo de selección**, **tiempo de carga*
 ---
 
 
-
+<a id='instalar'>
 ## 🚀 Requisitos
 Antes de ejecutar el proyecto, asegurate de tener instalado:
 
@@ -78,7 +84,6 @@ npm install
 
 ## 🚀 Ejecución del proyecto
 El proyecto ya viene compilado en la carpeta `dist/`.  
-A continuación se detallan dos caminos posibles según el sistema operativo utilizado.
 
 --------------------------------------------------------------------
 
@@ -90,7 +95,7 @@ npm run start
 ```
 --------------------------------------------------------------------
 
-## 🪟🍎 ✔️ Si usás Windows o macOS (otros SO)
+## 🪟🍎 ✔️ Si usás Windows o macOS
 
 ### 4️⃣ Ejecutar el proyecto
 ```
