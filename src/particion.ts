@@ -9,14 +9,17 @@ export default class Particion {
     private inicio_particion: number;
     private fin_particion: number;
     private finTarea: number = -1;
+    private liberacion: boolean;
 
     constructor (
         tamanio: number,
         inicio_particion: number,
         fin_particion: number,
         libre: boolean = false,
-        tarea: Tarea | null = null
+        tarea: Tarea | null = null,
+        liberacion? : boolean
     ) {
+        this.liberacion = liberacion ?? false;
         this.libre = libre;
         this.tamanio = tamanio;
         this.tarea = tarea;
@@ -33,7 +36,7 @@ export default class Particion {
 
     asignarTarea(tarea: Tarea): void {
         this.tarea = tarea;
-        this.finTarea = clock + tiempoSeleccion + tiempoCarga + tarea.getDuracion(); // sumar tiempo  liberacion
+        this.finTarea = clock + tarea.getDuracion() ; 
         this.libre = false;
     }
 
@@ -70,6 +73,11 @@ export default class Particion {
     getTarea(): Tarea {
         return this.tarea!;
     }
+
+    getLiberacion(): boolean{
+        return this.liberacion;
+    }
+
 
     setInicio(x: number): void{
         this.inicio_particion = x;

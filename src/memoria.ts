@@ -233,9 +233,15 @@ export default class Memoria {
     calcularFragmentacion(): void {
 
         const hayPendientes: boolean = (this.tareasPendientes.length > 0);
+        const hayOcupadas = this.particiones.some(p => !p.getLibre());
+
         for (const p of this.particiones) {
-            if ( p.getLibre() && (hayPendientes || this.tanda.hayTareas()) ) {
-                this.fragmentacion += p.getTamanio();
+            // la partion esta libre Y es la ultima tarea a ejecutar?
+            if ( p.getLibre() && (hayPendientes || this.tanda.hayTareas()) ){
+                if ( !(p.getLiberacion()) && hayOcupadas ){
+                    this.fragmentacion += p.getTamanio();
+                }
+
             }
         }
 

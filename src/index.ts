@@ -269,21 +269,68 @@ async function main() {
   // =============================
   //    SIMULADOR
   // =============================
+
+  interface Espera {
+    tarea: Tarea,
+    tiempoRestante: number
+  }
+
+  let colaEspera: Espera[] = [];
+  const tiempoEspera: number = tiempoSeleccion + tiempoCarga;
+
   while (tanda.hayTareas() || memoria.hayTareasPendiente()) {
+
     clock += 1;
     agregarLog("");
     agregarLog("==============================================================");
     agregarLog("                TIEMPO [" + clock + "]");
     agregarLog("==============================================================");
     agregarLog("");
-
+    
     memoria.finalizarTareas();
     agregarLog("Memoria disponible: " + memoria.getTotalLibre());
 
     let tarea: Tarea | null = tanda.ObtenerTarea();
+
+    if (tiempoEspera > 0){
+
+      // Reduzco el tiempo restante en la cola
+      for (const item of colaEspera) {
+        agregarLog("======== REDUCCION TIEMPOS DE ESPERA ========");
+        item.tiempoRestante -= 1;
+        agregarLog(`Tiempo de espera tarea ${item.tarea.getNombre()} - ${item.tiempoRestante}`);
+      }
+
+      if ( !(tarea === null) ){
+
+        colaEspera.push({
+          tarea: tarea,
+          tiempoRestante: tiempoEspera
+        });
+        agregarLog(`Se añadio la tarea ${tarea.getNombre()} a la cola de espera - tiempo restante: ${tiempoEspera}`);
+        tarea = null;
+
+      }
+
+      // alguna tarea puede salir de la cola?
+      for (let i = 0; i < colaEspera.length; i++) {
+
+        if (colaEspera[i]!.tiempoRestante <= 0) {
+          agregarLog(`La tarea ${colaEspera[i]!.tarea.getNombre()} puede salir - espera = ${colaEspera[i]!.tiempoRestante}`);
+          let eliminado = colaEspera.splice(i, 1)[0];
+          tarea = eliminado!.tarea;
+          break;
+        }
+      }
+      
+      agregarLog("==========================================");
+
+    }
+
     memoria.agregarTarea(tarea!);
 
     memoria.calcularFragmentacion();
+
   }
 
   agregarLog(tanda.listosToString());
