@@ -10,7 +10,7 @@ import FirstFit from "./algoritmos/firstFit";
 import NextFit from "./algoritmos/nextFit";
 import BestFit from "./algoritmos/bestFit";
 import WorstFit from "./algoritmos/worstFit";
-import Estrategia from "./algoritmos/estrategia"; // si tu clase base se llama así
+import Estrategia from "./algoritmos/estrategia"; 
 
 // EXPORTS PRINCIPALES
 export let clock: number = -1;
@@ -46,7 +46,6 @@ function preguntar(rl: readline.Interface, texto: string): Promise<string> {
 // =============================
 async function seleccionarTanda(rl: readline.Interface): Promise<string> {
   const carpetaTandas = path.join(__dirname, "..", "tandas"); 
-  // OJO: ajusta la ruta si tu "dist" queda en otra carpeta
 
   const archivos = fs
     .readdirSync(carpetaTandas)
