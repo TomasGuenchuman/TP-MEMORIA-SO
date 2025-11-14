@@ -55,6 +55,7 @@ Estas pruebas fueron ejecutadas con **tiempo de selección**, **tiempo de carga*
 
 
 <a id='instalar'>
+
 ## 🚀 Requisitos
 Antes de ejecutar el proyecto, asegurate de tener instalado:
 
@@ -81,6 +82,8 @@ cd TP-MEMORIA-SO
 npm install
 ```
 --------------------------------------------------------------------
+
+<a id='ejecutar'>
 
 ## 🚀 Ejecución del proyecto
 El proyecto ya viene compilado en la carpeta `dist/`.  
