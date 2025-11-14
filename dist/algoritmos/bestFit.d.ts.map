@@ -1,0 +1,1 @@
+{"version":3,"file":"bestFit.d.ts","sourceRoot":"","sources":["../../src/algoritmos/bestFit.ts"],"names":[],"mappings":"AAAA,OAAO,UAAU,MAAM,cAAc,CAAC;AACtC,OAAO,SAAS,MAAM,cAAc,CAAC;AACrC,OAAO,KAAK,MAAM,UAAU,CAAC;AAG7B,MAAM,CAAC,OAAO,OAAO,OAAQ,SAAQ,UAAU;IAE3C,oBAAoB,CAAC,WAAW,EAAE,SAAS,EAAE,EAAE,KAAK,EAAE,KAAK,GAAG,SAAS,GAAG,IAAI;CA0BjF"}

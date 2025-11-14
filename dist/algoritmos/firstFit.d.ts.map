@@ -1,0 +1,1 @@
+{"version":3,"file":"firstFit.d.ts","sourceRoot":"","sources":["../../src/algoritmos/firstFit.ts"],"names":[],"mappings":"AAAA,OAAO,UAAU,MAAM,cAAc,CAAC;AACtC,OAAO,SAAS,MAAM,cAAc,CAAC;AACrC,OAAO,KAAK,MAAM,UAAU,CAAC;AAG7B,MAAM,CAAC,OAAO,OAAO,QAAS,SAAQ,UAAU;IAE5C,oBAAoB,CAAC,WAAW,EAAE,SAAS,EAAE,EAAE,KAAK,EAAE,KAAK,GAAG,SAAS,GAAG,IAAI;CAmB/E"}

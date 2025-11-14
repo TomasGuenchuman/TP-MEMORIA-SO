@@ -1,0 +1,1 @@
+{"version":3,"file":"estrategia.d.ts","sourceRoot":"","sources":["../../src/algoritmos/estrategia.ts"],"names":[],"mappings":"AAAA,OAAO,SAAS,MAAM,cAAc,CAAC;AACrC,OAAO,KAAK,MAAM,UAAU,CAAC;AAE7B,MAAM,CAAC,OAAO,CAAC,QAAQ,OAAO,UAAU;IAEpC,QAAQ,CAAC,oBAAoB,CAC7B,WAAW,EAAE,SAAS,EAAE,EACxB,KAAK,EAAE,KAAK,GACX,SAAS,GAAG,IAAI;CACpB"}
