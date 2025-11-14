@@ -10,6 +10,16 @@ Para ejecutar el simulador con diferentes cargas de trabajo, simplemente incorpo
 Cada archivo debe respetar la estructura de definición de tareas (nombre, tiempo de arribo, duración y memoria requerida).  
 Una vez agregado, el simulador podrá leerlo automáticamente para generar la tanda correspondiente.
 
+Formato que debe respetar cada elemento del JSON:
+```
+{
+  "nombre": "T5",
+  "tiempo_arribo": 4,
+  "duracion": 2,
+  "memoria_requerida": 30
+}
+```
+
 ### 📊 Pruebas incluidas (gantt.xls)  
 En el archivo **gantt.xls**, ubicado en la carpeta raíz del proyecto, se incluyen diversas pruebas del simulador.  
 Cada hoja del archivo utiliza como nombre:
