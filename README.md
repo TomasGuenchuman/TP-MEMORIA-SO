@@ -12,12 +12,11 @@ A continuación se establecen ciertos criterios y decisiones de diseño para int
   Esto se debe a que la tarea aún no fue cargada a memoria RAM, por lo cual no existen particiones a evaluar para fragmentación.
 
 - **No se calcula fragmentación durante el tiempo de liberación.**  
-  En esta etapa la tarea ya terminó y se libera la partición; la fragmentación se mide únicamente en los estados estables posteriores a cada ciclo del reloj.
+  En esta etapa la tarea ya terminó y se libera la partición
 
-- *(Agregar más supuestos aquí…)*  
-  -  
-  -  
-
+- **El tiempo de selección incluye el recálculo de la tabla de particiones.**  
+  Por este motivo, en cada ciclo del reloj el simulador revisará si existen particiones contiguas que puedan fusionarse.  
+  Si dos o más particiones contiguas están libres, el simulador las unificará automáticamente en una sola partición mayor.  
 ---
 
 ### 📌 Agregar nuevas tandas de tareas  
