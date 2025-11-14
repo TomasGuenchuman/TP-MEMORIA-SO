@@ -48,6 +48,7 @@ export default class Particion {
         this.libre = true;
         this.finTarea = -1;
         this.tarea = null;
+        this.liberacion = false;
     }
 
     getLibre(): boolean {
@@ -78,6 +79,10 @@ export default class Particion {
         return this.liberacion;
     }
 
+    setLiberacion(x: boolean): void{
+        this.liberacion = x;
+    }
+
 
     setInicio(x: number): void{
         this.inicio_particion = x;
@@ -93,6 +98,10 @@ export default class Particion {
 
     setLibre(x: boolean): void {
         this.libre = x;
+    }
+
+    sumarFinTarea(x: number): void{
+        this.finTarea += x;
     }
 
     toString(): string {

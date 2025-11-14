@@ -3,7 +3,7 @@ import FirstFit from "./algoritmos/firstFit";
 import Particion from "./particion";
 import Tarea from "./tarea";
 import Tanda from "./tanda";
-import {clock,agregarLog} from "./index";
+import {clock,agregarLog, tiempoLiberacion} from "./index";
 
 interface Retorno {
     finTarea: number,
@@ -17,6 +17,11 @@ interface Resumen {
     tarea: Tarea
 }
 
+interface Espera {
+    particion: Particion,
+    tiempoEspera: number;
+}
+
 export default class Memoria {
     private tamanio: number;
     private particiones: Particion[] = [];
@@ -24,11 +29,15 @@ export default class Memoria {
     private totalLibre: number;
     private estrategia: Estrategia;
     private tanda: Tanda = Tanda.getInstance();
+    private colaEspera: Espera[] = [];
+    
     // resultados:
     private fragmentacion: number = 0;
     private tiempoRetorno: Retorno[] = [];
     private tiempoMedioRetorno: number = 0;
     private resumen: Resumen[] = [];
+
+
     constructor (tamanio: number, estrategia: Estrategia = new FirstFit()){
         this.tamanio = tamanio;
         this.totalLibre = tamanio;
@@ -203,9 +212,43 @@ export default class Memoria {
 
     finalizarTareas(): void {
         agregarLog("Se busca finalizar tareas...");
-        let i: number = 0;
-        for (const particion of this.particiones) {
-            if (!particion.getLibre() && (particion.getFinTarea() <= clock) ) {
+        let x: number = 0;
+        // reducir el tiempo de espera        
+        if (tiempoLiberacion > 0){
+
+            agregarLog("======== REDUCCION TIEMPOS DE ESPERA ========");
+            for (const item of this.colaEspera) {
+                item.tiempoEspera -= 1;
+            }
+    
+            // hay alguna tarea que pueda finalizar
+            for (const particion of this.particiones) {
+    
+                // puede finalizar la tarea?
+                if ( !(particion.getLibre()) && (particion.getFinTarea() <= clock)  && !(particion.getLiberacion()) ){
+    
+                    this.colaEspera.push({
+                        particion: particion,
+                        tiempoEspera: tiempoLiberacion
+                    });
+    
+                    particion.setLiberacion(true);
+    
+                }
+            
+            }
+    
+          // hay tareas que puedan salir de la cola?
+          for (let i = 0; i < this.colaEspera.length; i++) {
+    
+            if (this.colaEspera[i]!.tiempoEspera <= 0) {
+                x += 1;
+                let eliminado: Espera | undefined = this.colaEspera.splice(i, 1)[0];
+                let particion: Particion | undefined = eliminado!.particion;
+                // LE TENGO QUE SUMAR EL TIEMPO DE LA LIBERACION A lA PARTICION.
+                particion.sumarFinTarea(tiempoLiberacion);
+    
+                // logica finalizacion de la tarea
                 agregarLog("Se libero la particion");
                 this.tanda.agregar(particion.getTarea().clone());
                 agregarLog(particion.toString());
@@ -220,14 +263,51 @@ export default class Memoria {
                     tarea: particion.getTarea().clone()
                 });
                 this.totalLibre += particion.getTamanio();
-                i += 1;
                 particion.finalizarTarea();
+                
             }
+
         }
-        agregarLog("-   Tareas finalizadas: " + i);
+        
+      }else {
+        // no hay tiempo de liberacion
+        for (const particion of this.particiones) {
+    
+            // puede finalizar la tarea?
+            if(!particion.getLibre() && (particion.getFinTarea() <= clock) ){
+    
+                // logica finalizacion de la tarea
+                agregarLog("Se libero la particion");
+                this.tanda.agregar(particion.getTarea().clone());
+                agregarLog(particion.toString());
+                this.tiempoRetorno.push({
+                    finTarea: particion.getFinTarea(),
+                    tarea: particion.getTarea().clone()
+                });
+                this.resumen.push({
+                    inicio: particion.getInicio(),
+                    fin: particion.getFin(),
+                    finTarea: particion.getFinTarea(),
+                    tarea: particion.getTarea().clone()
+                });
+                this.totalLibre += particion.getTamanio();
+                x += 1;
+                particion.finalizarTarea();
+
+            }
+        
+        }
+
+      }
+
+
+        agregarLog("-   Tareas finalizadas: " + x);
+
+
         if(this.particiones.length >= 2){
             this.fusionarParticionesContiguas();
         }
+        
     }
 
     calcularFragmentacion(): void {
@@ -238,7 +318,7 @@ export default class Memoria {
         for (const p of this.particiones) {
             // la partion esta libre Y es la ultima tarea a ejecutar?
             if ( p.getLibre() && (hayPendientes || this.tanda.hayTareas()) ){
-                if ( !(p.getLiberacion()) && hayOcupadas ){
+                if ( ( !(p.getLiberacion()) && hayOcupadas ) ){
                     this.fragmentacion += p.getTamanio();
                 }
 
@@ -257,7 +337,7 @@ export default class Memoria {
         }
         agregarLog("-Retorno de la tanda: " + retornoTanda);
         agregarLog("total tareas: " + this.tanda.getTotalTarea());
-        agregarLog("-Tiempo medio de Retorno: " + this.tiempoMedioRetorno/this.tanda.getTotalTarea());
+        agregarLog("-Tiempo medio de Retorno: " + this.tiempoMedioRetorno/this.tiempoRetorno.length);
         
     }
 
