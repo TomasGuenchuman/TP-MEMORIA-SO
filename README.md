@@ -10,7 +10,7 @@ Incluye la representación de memoria física, manejo de particiones dinámicas,
 - [Supuestos del simulador](#supuestos)
 - [Agregar Nuevas tandas](#tandas)
 - [Diagramas de Gantt](#gantt)
-- [Instalar las dependencias del proyecto](#instalar)
+- [Instalar proyecto](#instalar)
 - [Ejecucion del proyecto](#ejecutar)
 
 <a id='supuestos'>
@@ -57,9 +57,6 @@ Estas pruebas fueron ejecutadas con **tiempo de selección**, **tiempo de carga*
 
 ---
 
-
-<a id='instalar'>
-
 ## 🚀 Requisitos
 Antes de ejecutar el proyecto, asegurate de tener instalado:
 
@@ -70,6 +67,7 @@ Podés verificar tu versión de Node con:
 ```
 node -v
 ```
+<a id='instalar'>
 
 ## 📥 Instalación y ejecución del proyecto
 
