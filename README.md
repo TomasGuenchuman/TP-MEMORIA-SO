@@ -33,6 +33,8 @@ Formato que debe respetar cada elemento del JSON:
   "memoria_requerida": 30
 }
 ```
+---
+
 
 ### 📊 Pruebas incluidas (gantt.xls)  
 En el archivo **gantt.xls**, ubicado en la carpeta raíz del proyecto, se incluyen diversas pruebas del simulador.  
@@ -75,35 +77,30 @@ npm install
 --------------------------------------------------------------------
 
 ## 🚀 Ejecución del proyecto
+El proyecto ya viene compilado en la carpeta `dist/`.  
 A continuación se detallan dos caminos posibles según el sistema operativo utilizado.
 
 --------------------------------------------------------------------
 
-## 🐧 ✔️ Si usás Linux (recomendado)
+## 🐧 ✔️ Si usás Linux 
 
-### 4️⃣ Compilar el proyecto
+### 4️⃣ Ejecutar el proyecto
 ```
-npm run build
-```
-### 5️⃣ Ejecutar el proyecto
-```
-npm start
+npm run start
 ```
 --------------------------------------------------------------------
 
 ## 🪟🍎 ✔️ Si usás Windows o macOS (otros SO)
 
-En algunos sistemas operativos los scripts pueden fallar, por lo que la compilación y ejecución deben hacerse de forma manual.
-
-### 4️⃣ Compilar manualmente TypeScript
-1. Ejecutar compilador:
-```
-npx tsc
-```
-(Esto generará la carpeta "dist/" con los archivos JavaScript)
-
-1. Ejecutar el programa:
+### 4️⃣ Ejecutar el proyecto
 ```
 node dist/index.js
 ```
+## COMPILAR
+en caso de error, volver a compilar el proyecto
+
+```
+npx tsc
+```
+
 --------------------------------------------------------------------
